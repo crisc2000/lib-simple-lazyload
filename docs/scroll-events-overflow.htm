@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<div style="position:fixed; top:1em; right:1em; background-color:yellow; padding:10px">Normal <span id="console_n">0</span></div>
+<div style="position:fixed; top:1em; right:8em; background-color:yellow; padding:10px">Throttle <span id="console_t">0</span></div>
+<div style="position:fixed; top:1em; right:15em; background-color:yellow; padding:10px">Debounce <span id="console_d">0</span></div>
+<div id="content">
+	<img src="https://unsplash.it/400/300/?image=702" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=695" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=675" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=651" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=584" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=574" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=551" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=509" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=511" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=515" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=512" width="400" height="300"><br>
+	<img src="https://unsplash.it/400/300/?image=514" width="400" height="300"><br>
+</div>
+
+<script type="text/javascript">
+/*
+Scroll event Throttle or Debounce:
+http://unscriptable.com/2009/03/20/debouncing-javascript-methods/ //first example of using debounce
+http://benalman.com/projects/jquery-throttle-debounce-plugin/ //debounce and throttle functions
+https://remysharp.com/2010/07/21/throttling-function-calls //debounce and throttle functions
+https://css-tricks.com/debouncing-throttling-explained-examples/ //debounce and throttle functions, and demos
+https://davidwalsh.name/javascript-debounce-function //debounce function
+http://joshbroton.com/hooking-up-to-the-window-onscroll-event-without-killing-your-performance/ //set Interval method
+http://stackoverflow.com/questions/15996941/google-chrome-has-high-cpu-usage-for-my-scripts //set Interval with clear method
+https://www.ignoredbydinosaurs.com/posts/244-throttling-window-onscroll/ //set Date method
+http://joji.me/en-us/blog/how-to-develop-high-performance-onscroll-event //set Timeout method
+*/
+
+jsEvent("scroll", jsCountNormal);
+//function to count the normal scroll events
+var count_n = 1;
+function jsCountNormal() {
+	document.getElementById("console_n").innerHTML = count_n;
+	count_n++;
+}
+
+//function to count the THROTTLED scroll events using 250ms threshhold
+jsEvent("scroll", jsThrottle(jsCountThrottle,250));
+var count_t = 1;
+function jsCountThrottle() {
+	document.getElementById("console_t").innerHTML = count_t;
+	count_t++;
+}
+
+//function to count the DEBOUNCED scroll events using 250ms delay
+jsEvent("scroll", jsDebounce(jsCountDebounce,250));
+var count_d = 1;
+function jsCountDebounce() {
+	document.getElementById("console_d").innerHTML = count_d;
+	count_d++;
+}
+
+//function to listen events for modern and old browsers
+function jsEvent(event, callback) {
+	if (window.addEventListener) {
+		window.addEventListener(event, callback); //IE9+ method
+	}
+	else {
+		window.attachEvent("on" + event, callback); //IE8 method
+	}
+}
+
+//function to THROTTLE a function
+function jsThrottle(callback, threshhold) {
+	var last, timer;
+	return function() {
+		if (last && +new Date < last + threshhold) {
+			clearTimeout(timer);
+			timer = setTimeout(function() {
+				last = +new Date;
+				callback.apply(this, arguments);
+			}, threshhold);
+		}
+		else {
+			last = +new Date;
+			callback.apply(this, arguments);
+		}
+	};
+}
+
+//function to DEBOUNCE a function
+function jsDebounce(callback, delay) {
+	var timer;
+	return function() {
+		clearTimeout(timer);
+		timer = setTimeout(function() {
+			callback.apply(this, arguments);
+		}, delay);
+	};
+}
+
+</script>
+
+</body>
+</html>
