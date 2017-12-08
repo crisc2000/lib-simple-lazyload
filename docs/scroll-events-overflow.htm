@@ -36,7 +36,7 @@ https://www.ignoredbydinosaurs.com/posts/244-throttling-window-onscroll/ //set D
 http://joji.me/en-us/blog/how-to-develop-high-performance-onscroll-event //set Timeout method
 */
 
-jsEvent("scroll", jsCountNormal);
+window.addEventListener("scroll", jsCountNormal);
 //function to count the normal scroll events
 var count_n = 1;
 function jsCountNormal() {
@@ -44,30 +44,20 @@ function jsCountNormal() {
 	count_n++;
 }
 
+window.addEventListener("scroll", jsThrottle(jsCountThrottle,250));
 //function to count the THROTTLED scroll events using 250ms threshhold
-jsEvent("scroll", jsThrottle(jsCountThrottle,250));
 var count_t = 1;
 function jsCountThrottle() {
 	document.getElementById("console_t").innerHTML = count_t;
 	count_t++;
 }
 
+window.addEventListener("scroll", jsDebounce(jsCountDebounce,250));
 //function to count the DEBOUNCED scroll events using 250ms delay
-jsEvent("scroll", jsDebounce(jsCountDebounce,250));
 var count_d = 1;
 function jsCountDebounce() {
 	document.getElementById("console_d").innerHTML = count_d;
 	count_d++;
-}
-
-//function to listen events for modern and old browsers
-function jsEvent(event, callback) {
-	if (window.addEventListener) {
-		window.addEventListener(event, callback); //IE9+ method
-	}
-	else {
-		window.attachEvent("on" + event, callback); //IE8 method
-	}
 }
 
 //function to THROTTLE a function
