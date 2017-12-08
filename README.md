@@ -2,7 +2,7 @@
 Basically this kind of scripts called "Lazy Load" are improving:
 * web page load time - by not waiting for the all images to load before displaying the webpage;
 * client computer responsiveness - by not occupying client computer resources (cpu, ram) with the elements that are not viewed;
-* client-server internet data usage - by not downloading images that are not viewed;
+* client-server internet data usage - by not downloading images that are not viewed (usefull for mobile);
 
 The images source (src) attribute is replaced with an 1x1 pixel transparent GIF or PNG file or they BASE64 equivalent. The original image is only loaded when client scroll the web page and the image becomes visible in the screen (is in viewport).
 I recommend this type of scripts for web pages that contain more then 10 images with width bigger then 300 pixels.
@@ -33,10 +33,10 @@ Steps explained:
 * Simple Lazyload Demo: https://eliz82.github.io/simple-lazyload/simple-lazyload-demo.htm
 
 Contain a demo with some included code explanations:
-* function jsLazyload, is the main function that load the original image. Once original image is loaded class is removed from the image for the image to not be lazy loaded more then once;
+* function jsLazyload, is the main function that load the original image. Once original image is loaded, data-src is removed from the image for the image to not be loaded more then one time;
 * function jsViewport, is checking if image have reached in the screen (viewport);
 * function jsThrottle, is stooping the jsLazyload being executed more then one time in a specified time interval (250 means that the function will be executed maximum 4 times in 1 second);
-* function jsDebounce, is executing the jsLazyload only once per event (at the event stop);
+* function jsDebounce, is executing the jsLazyload only once per event (after the event stop);
 
 ### /docs/scroll-events-overflow.htm
 * Scroll Overflow Demo: https://eliz82.github.io/simple-lazyload/scroll-events-overflow.htm
