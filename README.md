@@ -30,7 +30,7 @@ Steps explained:
 
 ## Demo
 ### /docs/simple-lazyload-demo.htm
-* Simple Lazyload Demo: https://crisc82.github.io/lib-simple-lazyload/simple-lazyload-demo.htm
+* Simple Lazyload Demo: https://crisc2000.github.io/lib-simple-lazyload/simple-lazyload-demo.htm
 
 Contain a demo with some included code explanations:
 * function jsLazyload, is the main function that load the original image. Once original image is loaded, data-src is removed from the image for the image to not be loaded more then one time;
@@ -39,7 +39,7 @@ Contain a demo with some included code explanations:
 * function jsDebounce, is executing the jsLazyload only once per event (after the event stop);
 
 ### /docs/scroll-events-overflow.htm
-* Scroll Overflow Demo: https://crisc82.github.io/lib-simple-lazyload/scroll-events-overflow.htm
+* Scroll Overflow Demo: https://crisc2000.github.io/lib-simple-lazyload/scroll-events-overflow.htm
 
 This is a script demo to demonstrate the effectiveness of scroll event overflow protection. The demo page is counting and comparing the number of scroll events in a page.
 * *debounced events* VS *throttled events* VS *normal events*
